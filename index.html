@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[Global_ARG]] — rect*repair</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.1.1/dist/maplibre-gl.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <button class="nav-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+        <div class="header-title">[[GLOBAL_ARG]]</div>
+        <nav>
+            <a href="index.html" class="active">Map</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="about.html">About</a>
+            <a href="#">Join Discord</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="map-section">
+            <div id="map"></div>
+            <div class="map-overlay">
+                <h3>you are here</h3>
+                <div class="coord" id="hover-coord">hover for coordinates</div>
+            </div>
+            <!-- <div class="stats-overlay">
+                <div class="stat-box">
+                    <div class="num">5</div>
+                    <div class="label">Active Nodes</div>
+                </div>
+            </div> -->
+            <div class="style-switcher" onclick="switchStyle(currentStyleIndex + 1)">
+                <div class="label">Map Style [M]</div>
+                <div id="style-indicator">Stamen Toner</div>
+            </div>
+        </section>
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h2>Nodes</h2>
+                <ul class="locations-list">
+                    <li class="location-item" data-city="shanghai">
+                        <div class="location-dot"></div>
+                        <div class="location-info">
+                            <div class="location-city">Shanghai, CN</div>
+                            <div class="location-org">rect_repair</div>
+                        </div>
+                        <div class="location-tz">UTC+8</div>
+                    </li>
+                    <li class="location-item" data-city="tokyo">
+                        <div class="location-dot"></div>
+                        <div class="location-info">
+                            <div class="location-city">Tokyo, JP</div>
+                            <div class="location-org">Farfama (gaemz)</div>
+                        </div>
+                        <div class="location-tz">UTC+9</div>
+                    </li>
+                    <li class="location-item" data-city="hague">
+                        <div class="location-dot"></div>
+                        <div class="location-info">
+                            <div class="location-city">The Hague, NL</div>
+                            <div class="location-org">Jana Romanova</div>
+                        </div>
+                        <div class="location-tz">UTC+1</div>
+                    </li>
+                    <li class="location-item" data-city="london">
+                        <div class="location-dot"></div>
+                        <div class="location-info">
+                            <div class="location-city">London, UK</div>
+                            <div class="location-org">studio playfool</div>
+                        </div>
+                        <div class="location-tz">UTC+0</div>
+                    </li>
+                    <li class="location-item" data-city="mexico">
+                        <div class="location-dot"></div>
+                        <div class="location-info">
+                            <div class="location-city">Mexico City, MX</div>
+                            <div class="location-org">Diego</div>
+                        </div>
+                        <div class="location-tz">UTC-6</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section" id="mini-calendar">
+                <!-- Calendar renders dynamically via calendar-sync.js -->
+                <h2>Loading...</h2>
+                <div class="calendar"></div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Upcoming</h2>
+                <ul class="event-list" id="events-list">
+                    <!-- Events render dynamically via calendar-sync.js -->
+                </ul>
+            </div>
+
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-brand">[[rect*]] repair 🔧 2026</div>
+        <div class="footer-status">
+            <span class="blink">●</span>
+            <span>SYS::ONLINE</span>
+        </div>
+        <div class="footer-links">
+            <a href="#">ITCH.IO</a>
+            <a href="#">GITHUB</a>
+        </div>
+        <div class="footer-time" id="current-time"></div>
+    </footer>
+
+    <script src="https://unpkg.com/maplibre-gl@4.1.1/dist/maplibre-gl.js"></script>
+    <script src="calendar-config.js"></script>
+    <script src="calendar-sync.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

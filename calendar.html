@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar — [[Global_ARG]]</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="calendar-page.css">
+</head>
+
+<body>
+    <header>
+        <button class="nav-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+        <div class="header-title">[[GLOBAL_ARG]]</div>
+        <nav>
+            <a href="index.html">Map</a>
+            <a href="calendar.html" class="active">Calendar</a>
+            <a href="about.html">About</a>
+            <a href="#">Join Discord</a>
+        </nav>
+    </header>
+
+    <main class="calendar-main">
+        <div class="calendar-page">
+            <!-- Timeline sidebar -->
+            <div class="timeline-sidebar">
+                <h2>TIMELINE</h2>
+                <div class="timeline" id="timeline">
+                    <!-- Timeline renders dynamically via calendar-sync.js -->
+                </div>
+            </div>
+
+            <!-- Calendar grid -->
+            <div class="calendar-grid-container">
+                <div class="calendar-grid-header">
+                    <h2 id="calendar-month-title">LOADING...</h2>
+                    <div class="calendar-nav">
+                        <button onclick="navigateMonth(-1)">←</button>
+                        <button onclick="navigateMonth(1)">→</button>
+                    </div>
+                </div>
+
+                <div class="calendar-large" id="large-calendar">
+                    <!-- Calendar renders dynamically via calendar-sync.js -->
+                </div>
+
+                <!-- Events grid -->
+                <div class="events-grid" id="events-grid">
+                    <!-- Events render dynamically via calendar-sync.js -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-brand">[[rect*]]repair</div>
+        <div class="footer-status">
+            <span class="blink">●</span>
+            <span>SYS::ONLINE</span>
+        </div>
+        <div class="footer-links">
+            <a href="#">ITCH.IO</a>
+            <a href="#">GITHUB</a>
+        </div>
+        <div class="footer-time" id="current-time"></div>
+    </footer>
+    <script src="calendar-config.js"></script>
+    <script src="calendar-sync.js"></script>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('current-time').textContent = time;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Month navigation
+        let currentYear = calendarSync.isConfigured ? new Date().getFullYear() : 2026;
+        let currentMonth = calendarSync.isConfigured ? new Date().getMonth() : 2;
+
+        function navigateMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            calendarRenderer.renderLargeCalendar('large-calendar', currentYear, currentMonth);
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            document.getElementById('calendar-month-title').textContent =
+                `${monthNames[currentMonth].toUpperCase()} ${currentYear}`;
+        }
+    </script>
+</body>
+
+</html>
