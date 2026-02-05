@@ -1,5 +1,10 @@
-// Map styles - using free tile providers (no API key needed)
+// Stadia Maps API key - get free key at https://stadiamaps.com/
+// Add your domain (sandpills.github.io) as a property, then paste key here:
+const STADIA_API_KEY = ''; // leave empty to disable Stamen styles
+
+// Map styles
 const mapStyles = [
+    // CARTO styles (free, no key needed)
     {
         name: 'CARTO Dark',
         tiles: ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'],
@@ -15,11 +20,24 @@ const mapStyles = [
         tiles: ['https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png'],
         attribution: '© CARTO © OpenStreetMap'
     },
-    {
-        name: 'OpenStreetMap',
-        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-        attribution: '© OpenStreetMap contributors'
-    },
+    // Stamen styles (requires STADIA_API_KEY above)
+    ...(STADIA_API_KEY ? [
+        {
+            name: 'Stamen Toner',
+            tiles: [`https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}@2x.png?api_key=${STADIA_API_KEY}`],
+            attribution: '© Stadia Maps © Stamen Design © OpenStreetMap'
+        },
+        {
+            name: 'Stamen Toner Lite',
+            tiles: [`https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}@2x.png?api_key=${STADIA_API_KEY}`],
+            attribution: '© Stadia Maps © Stamen Design © OpenStreetMap'
+        },
+        {
+            name: 'Stamen Terrain',
+            tiles: [`https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}@2x.png?api_key=${STADIA_API_KEY}`],
+            attribution: '© Stadia Maps © Stamen Design © OpenStreetMap'
+        },
+    ] : []),
 ];
 let currentStyleIndex = 0;
 
