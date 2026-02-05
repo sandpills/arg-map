@@ -14,7 +14,7 @@ Thumbs.db
 # Logs
 *.log
 
-# Node (if you add it later)
+# Node
 node_modules/
 .env
 .env.local
