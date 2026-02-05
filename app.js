@@ -1,24 +1,24 @@
-// Map styles
+// Map styles - using free tile providers (no API key needed)
 const mapStyles = [
-    {
-        name: 'Stamen Toner',
-        tiles: ['https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}@2x.png'],
-        attribution: '© Stadia Maps © Stamen Design © OpenStreetMap'
-    },
-    {
-        name: 'Stamen Toner Lines',
-        tiles: ['https://tiles.stadiamaps.com/tiles/stamen_toner_lines/{z}/{x}/{y}@2x.png'],
-        attribution: '© Stadia Maps © Stamen Design © OpenStreetMap'
-    },
-    {
-        name: 'Stamen Terrain Lines',
-        tiles: ['https://tiles.stadiamaps.com/tiles/stamen_terrain_lines/{z}/{x}/{y}@2x.png'],
-        attribution: '© Stadia Maps © Stamen Design © OpenStreetMap'
-    },
     {
         name: 'CARTO Dark',
         tiles: ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'],
         attribution: '© CARTO © OpenStreetMap'
+    },
+    {
+        name: 'CARTO Light',
+        tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'],
+        attribution: '© CARTO © OpenStreetMap'
+    },
+    {
+        name: 'CARTO Voyager',
+        tiles: ['https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png'],
+        attribution: '© CARTO © OpenStreetMap'
+    },
+    {
+        name: 'OpenStreetMap',
+        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+        attribution: '© OpenStreetMap contributors'
     },
 ];
 let currentStyleIndex = 0;
@@ -54,25 +54,25 @@ function getLineCoords(coord1, coord2) {
     return [[lon1, lat1], [lon2, lat2]];
 }
 
-// Initialize map with Stamen Toner (blueprint style) via Stadia Maps
+// Initialize map with CARTO Dark (no API key needed)
 const map = new maplibregl.Map({
     container: 'map',
     style: {
         version: 8,
         sources: {
-            'stamen-toner': {
+            'carto-dark': {
                 type: 'raster',
                 tiles: [
-                    'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}@2x.png'
+                    'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'
                 ],
                 tileSize: 256,
-                attribution: '© Stadia Maps © Stamen Design © OpenMapTiles © OpenStreetMap'
+                attribution: '© CARTO © OpenStreetMap'
             }
         },
         layers: [{
-            id: 'stamen-toner-layer',
+            id: 'carto-dark-layer',
             type: 'raster',
-            source: 'stamen-toner',
+            source: 'carto-dark',
             minzoom: 0,
             maxzoom: 19
         }]
